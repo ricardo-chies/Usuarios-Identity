@@ -7,8 +7,10 @@ using Usuarios.API.Interfaces;
 
 namespace Usuarios.API.Services
 {
-    public class TokenService : ITokenService
+    public class TokenService(IConfiguration configuration) : ITokenService
     {
+        private readonly IConfiguration _configuration = configuration;
+
         public string GenerateToken(Usuario usuario)
         {
             Claim[] claims = new Claim[]
@@ -18,7 +20,7 @@ namespace Usuarios.API.Services
                 new Claim(ClaimTypes.DateOfBirth, usuario.DataNascimento.ToString())
             };
 
-            var chave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("JOVBHNW970R83GVH783VH3U9IVBN3UI9V3HV87"));
+            var chave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SymmetricSecurityKey"]));
 
             var signingCredentials = new SigningCredentials(chave, SecurityAlgorithms.HmacSha256);
 
