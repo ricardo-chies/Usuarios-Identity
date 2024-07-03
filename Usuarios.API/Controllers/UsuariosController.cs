@@ -1,8 +1,5 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Usuarios.API.Dtos.Requests;
-using Usuarios.API.Entities;
 using Usuarios.API.Interfaces;
 
 namespace Usuarios.API.Controllers
@@ -23,6 +20,13 @@ namespace Usuarios.API.Controllers
         {
             await _usuarioService.CadastrarUsuario(request);
             return Ok("Usuário cadastrado!");
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginUsuario(LoginUsuarioRequest request)
+        {
+            await _usuarioService.LoginUsuario(request);
+            return Ok("Usuário autenticado!");
         }
     }
 }

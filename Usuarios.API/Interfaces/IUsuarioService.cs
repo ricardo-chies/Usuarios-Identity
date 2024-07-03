@@ -5,5 +5,6 @@ namespace Usuarios.API.Interfaces
     public interface IUsuarioService
     {
         Task CadastrarUsuario(CadastroUsuarioRequest request);
+        Task LoginUsuario(LoginUsuarioRequest request);
     }
 }
